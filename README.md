@@ -24,6 +24,7 @@ Major/Minor Events
 # Project Plan: 
 
 Week 1-2:
+
 •	Build Library for Dungeons and Dragons data structures and types i.e. Orcs, Wizards, Dragons?
 •	Define how events are generated and passed - Parameters to pass certain conditions
 •	Attributes and skills for characters
@@ -31,18 +32,20 @@ Week 1-2:
 •	Create certain functions to interact between the data and types - and IO friendly
 
 Resources:
+
 •	Randomization Library: https://hackage.haskell.org/package/random-1.1/docs/System-Random.html
 •	Tree Library in Haskell:
 •	https://hackage.haskell.org/package/containers-0.5.8.1/docs/Data-Tree.html
 
 Week 3-4:
+
 •	Build a web server and database in Haskell
-o	Test server out between users 
-o	Understand how users interact with each other 
+  • Test server out between users 
+  •	Understand how users interact with each other 
 •	Build a SQLite Database in Haskell 
-o	Upload test data in database 
-o	Test basic queries on db - create standard queries going to be used to be processed through get/post requests
-o	Send data to server chat session
+  •	Upload test data in database 
+  •	Test basic queries on db - create standard queries going to be used to be processed through get/post requests
+  •	Send data to server chat session
 •	Integrate both projects and test out sessions between users.
 
 Resources:
