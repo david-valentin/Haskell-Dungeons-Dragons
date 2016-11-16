@@ -17,23 +17,25 @@ Designing the actual data and potential types should be the primary and initial 
 
 After much wandering in the poorly lit mine, the heroes spot a pack of goblins around a chest in the abandoned mine. 
 
-
 ## Terms to define:
 
 ### Major Events:
 * Major events will include a game theory problem in which each player will make their own decision. The outcome of the decision will decide whether or not the players will continue co-operating in a single storyline or diverge into their own storylines. 
 
-### Minor Events
+### Minor Events:
 1. Minor events will involve an IO interaction:
 * Involves combat with a creature(s) 
 * Entering a new destination
 * Engaging with random individuals in the game
 
-### Main Storyline:
-•	The main storyline will be a tree structure which will store the weights accrued from other the players' storylines. These weights will be passed into a finality function along with player stats which will produce an ending involving both players. 
 
-# General Resources: 
-•	https://en.wikipedia.org/wiki/List_of_games_in_game_theory
+### Main Storyline:
+*	The main storyline will be a tree structure which will store the weights accrued from other the players' storylines. These weights will be passed into a finality function along with player stats which will produce an ending involving both players or if the players choose to separate to single player during the major event.
+
+
+
+### General Resources: 
+*	https://en.wikipedia.org/wiki/List_of_games_in_game_theory
 
 # Project Plan: 
 
