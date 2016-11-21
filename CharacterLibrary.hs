@@ -40,12 +40,12 @@ datatype Interaction = Interaction { Description :: String
 
 -- Items are randomly given by villagers or unlocked items
 datatype Item = { ItemName :: String,
-									Boost :: Int }
+		  Boost :: Int }
 
 
 datatype Hero = Hero { Name :: String,
                        Health :: Int,
-											 Strength :: Int,
+		       Strength :: Int,
                        Intelligence :: Int,
                        Charm :: Int,
                        Bag :: [Item]
