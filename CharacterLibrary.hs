@@ -28,9 +28,16 @@ datatype Creature = Creature { Type :: String,
 
 -- Players always get first hit. Creature hits back -
 
+-- List Items:
 
+let passive_locations  = ["inn", "village", "parish", "hamlet", "settlement", "pub", "tavern"]
 
--- End Game = Both Players Die.
+let passive_characters = ["barkeep", "villager", "boy"]
+
+let puzzle_locations = ["door", "gate", "gargoyle", "writings"]
+
+let puzzle_descriptions = ["mysterious", "cryptic", "obscure", "puzzling"]
+
 
 datatype Interaction = Interaction { Description :: String
                                      Requirements :: (Int, String)
