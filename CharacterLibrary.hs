@@ -38,6 +38,13 @@ let puzzle_locations = ["door", "gate", "gargoyle", "writings"]
 
 let puzzle_descriptions = ["mysterious", "cryptic", "obscure", "puzzling"]
 
+let active_location = ["pasture", "cave", "dungeon", "plains", "wasteland", "mine"]
+
+let active_location_description = ["misty", "cold", "dark", "dusty"]
+
+let active_group_description = ["platoon", "group", "division", "unit", "gang", "pack", "mob", "band"]
+
+
 
 datatype Interaction = Interaction { Description :: String
                                      Requirements :: (Int, String)
