@@ -10,7 +10,6 @@ module CharacterLibrary where
 -- Bandit = [0.3 - 0.5] * eventLevel
 -- Dragon = [0.6 - 0.8] * evenLevel
 
-<<<<<<< HEAD
 data Race = Halfling
           | Dwarf
           | Human
@@ -74,63 +73,3 @@ setCha (Abilities s d c i w ch l x) nch = Abilities s d c i w nch l x
 
 getStats :: PC -> Abilities
 getStats (PC a _ _ _ _) = a
-=======
-
-
-
-datatype Creature = Creature { Type :: String,
-                               Health :: Int,
-                               Weight :: Float
-                               }
-                               deriving (Show)
-
-
-
-
--- 15 points distributed how they want.
--- Strength = Damage you can deal
--- Intelligence = Access to doors/certain events
-
--- Players always get first hit. Creature hits back -
-
--- List Items:
-
-let passive_locations  = ["inn", "village", "parish", "hamlet", "settlement", "pub", "tavern"]
-
-let passive_characters = ["barkeep", "villager", "boy"]
-
-let puzzle_locations = ["door", "gate", "gargoyle", "writings"]
-
-let puzzle_descriptions = ["mysterious", "cryptic", "obscure", "puzzling"]
-
-let active_location = ["pasture", "cave", "dungeon", "plains", "wasteland", "mine"]
-
-let active_location_description = ["misty", "cold", "dark", "dusty"]
-
-let active_group_description = ["platoon", "group", "division", "unit", "gang", "pack", "mob", "band"]
-
-
-
-datatype Interaction = Interaction { Description :: String
-                                     Requirements :: (Int, String)
-                                     Loot :: Item
-											}
-
-
--- Items are randomly given by villagers or unlocked items
-datatype Item = { ItemName :: String,
-		  Boost :: Int }
-
-
-datatype Hero = Hero { Name :: String,
-                       Health :: Int,
-		       Strength :: Int,
-                       Intelligence :: Int,
-                       Charm :: Int,
-                       Bag :: [Item]
-                       Type :: String
-                       }
-
-datatype Event = ActiveEvent Creature Plot
-               | PassiveEvent Interaction Plot
->>>>>>> f906f6e12b405405c7360329c8804dfc0175a4ad
