@@ -1,4 +1,4 @@
-
+module CharacterLibrary where
 -- a = Creature Name - i.e. Goblin
 -- b = Creature Health - 5
 -- c = Creature Damage - 2
@@ -10,54 +10,66 @@
 -- Bandit = [0.3 - 0.5] * eventLevel
 -- Dragon = [0.6 - 0.8] * evenLevel
 
+data Race = Halfling
+          | Dwarf
+          | Human
+          | Elf
+          deriving (Show)
+
+data Classc = Cleric
+           | Fighter
+           | Rogue
+           | Wizard
+           deriving (Show)
+
+data Typec = Humanoids
+          | Dragons
+          | Monstrosities
+          | Plants
+          deriving (Show)
+
+data Abilities = Abilities { strength :: Int,
+                           dexterity :: Int,
+                           costitution :: Int,
+                           intelligence :: Int,
+                           wisdom :: Int,
+                           charisma :: Int,
+                           level :: Int,
+                           xp :: Int
+                           } deriving (Show)
+
+data Item = Item { itemName :: String,
+                   boost :: Int
+                 } deriving (Show)
 
 
+data PC = PC { statsPC :: Abilities,
+                   name :: String,
+		               race :: String,
+                   classPC :: String,
+                   bag :: [Item]
+                 } deriving (Show)
 
-datatype Creature = Creature { Type :: String,
-                               Health :: Int,
-                               Weight :: Float
-                               }
-                               deriving (Show)
+data NPC = NPC { statsNPC :: Abilities,
+                     typeNPC :: Typec,
+                     size :: Int,
+                     cr :: Int
+                   } deriving (Show)
 
+setStr :: Abilities -> Int -> Abilities
+setStr (Abilities s d c i w ch l x) ns = Abilities ns d c i w ch l x
 
+setDex :: Abilities -> Int -> Abilities
+setDex (Abilities s d c i w ch l x) nd = Abilities s nd c i w ch l x
 
+setCost :: Abilities -> Int -> Abilities
+setCost (Abilities s d c i w ch l x) nc = Abilities s d nc i w ch l x
 
--- 15 points distributed how they want.
--- Strength = Damage you can deal
--- Intelligence = Access to doors/certain events
+setWis :: Abilities -> Int -> Abilities
+setWis (Abilities s d c i w ch l x) nw = Abilities s d c i nw ch l x
 
--- Players always get first hit. Creature hits back -
+setCha :: Abilities -> Int -> Abilities
+setCha (Abilities s d c i w ch l x) nch = Abilities s d c i w nch l x
 
--- List Items:
-
-let passive_locations  = ["inn", "village", "parish", "hamlet", "settlement", "pub", "tavern"]
-
-let passive_characters = ["barkeep", "villager", "boy"]
-
-let puzzle_locations = ["door", "gate", "gargoyle", "writings"]
-
-let puzzle_descriptions = ["mysterious", "cryptic", "obscure", "puzzling"]
-
-
-datatype Interaction = Interaction { Description :: String
-                                     Requirements :: (Int, String)
-                                     Loot :: Item
-											}
-
-
--- Items are randomly given by villagers or unlocked items
-datatype Item = { ItemName :: String,
-		  Boost :: Int }
-
-
-datatype Hero = Hero { Name :: String,
-                       Health :: Int,
-		       Strength :: Int,
-                       Intelligence :: Int,
-                       Charm :: Int,
-                       Bag :: [Item]
-                       Type :: String
-                       }
-
-datatype Event = ActiveEvent Creature Plot
-               | PassiveEvent Interaction Plot
+getStats :: PC -> Abilities
+getStats (PC a _ _ _ _) = a
