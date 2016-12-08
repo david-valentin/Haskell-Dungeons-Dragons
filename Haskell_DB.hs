@@ -4,19 +4,19 @@ import qualified Data.Text as T
 import           Database.SQLite.Simple
 import           Database.SQLite.Simple.FromRow
 
-data TestField = TestField Int T.Text deriving (Show)
+data DnD_Schema = DnD_Schema Int T.Text T.Text Int Int deriving (Show)
 
-instance FromRow TestField where
-  fromRow = TestField <$> field <*> field <*> field
+instance FromRow DnD_Schema where
+  fromRow = DnD_Schema <$> field <*> field <*> field <*> field <*> field
 
-instance ToRow TestField where
-  toRow (TestField id_ str) = toRow (id_, str, int)
+
+instance ToRow DnD_Schema where
+  toRow (DnD_Schema id_ ty text ca cb) = toRow (id_, ty, text, ca, cb)
 
 main :: IO ()
 main = do
   conn <- open "test.db"
-  execute_ conn "CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY, str TEXT)"
-  execute conn "INSERT INTO test (str, int) VALUES (?, ?)" (("You both come across a [ADJ] [LOCATION] and see a [GROUP_DESCRIPTION] of [STAT_DESCRIPTION] [CREATURE]. The creatures have not noticed you both yet and so you have time to decide." :: String, 5 :: Int))
-  r <- query_ conn "SELECT * from test" :: IO [TestField]
-  mapM_ print r
+  execute_ conn "CREATE TABLE IF NOT EXISTS DnD (id INTEGER PRIMARY KEY ASC, EventType Text, TextEvent Text, choiceA INTEGER, choiceB INTEGER)"
+  execute conn "INSERT INTO DnD (id, EventType, TextEvent, choiceA, choiceB) VALUES (?, ?, ?, ?, ?)" ((1 :: Int), ("action_event" :: String), ("You come across a [active_location_description] [active_location] and see a [active_group_description] of [creature]. The creatures have not noticed you yet and so you have time to decide." :: String), (1 :: Int), (2 :: Int))
+  print "Created"
   close conn
