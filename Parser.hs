@@ -3,12 +3,12 @@ module Parser where
 import Text.ParserCombinators.Parsec
 import qualified Data.List.Split as List
 import Data.List
--- import Data.Random.Extras
+import qualified Data.Map as Map
 
 data Option = Help
             | Choose (Char)
             | Stats
-            -- | Quit
+            | Quit
       deriving Show
 
 -- :c = chooseEvent
@@ -19,7 +19,7 @@ parseOptions :: Parser Option
 parseOptions = do {
           spaces --handle whitespace in beginning of command
           ; char ':'
-          ; parseChoice <|> parseHelp <|> parseStats
+          ; parseChoice <|> parseHelp <|> parseStats <|> parseQuit
           }
 
 parseStats :: Parser Option
@@ -34,6 +34,7 @@ parseHelp = do {
             char 'h'
             ; return Help
             }
+
 parseChoice :: Parser Option
 parseChoice = do {
               char 'c'
@@ -42,34 +43,30 @@ parseChoice = do {
               ; return $ Choose choice
               }
 
--- parseQuit :: Parser Option
--- parseQuit = do {
---             char 'q'
---             ; return Quit
---             }
+parseQuit :: Parser Option
+parseQuit = do {
+            char 'q'
+            ; return Quit
+            }
 
 --For testing purposes
-run :: Show a => Parser a -> String -> IO ()
-run = parseTest
+run :: GenParser tok st a -> st -> SourceName -> [tok] -> Either ParseError a
+run = runParser
 
 --------------------------------------------------------------------------------
-madLib :: [String]
-madLib = ["[Creature]", "[Cadj]"]
-
-choices :: [[String]]
-choices = [creatures, cadjs]
-
- --Look into Vectors
-creatures :: [String]
-creatures = ["kobold", "orc", "bulette", "gelatinous cube"]
-
-cadjs :: [String]
-cadjs =  ["big", "huge", "puney"]
-
-parsePlot :: String -> [String] -> String
-parsePlot s [] = s
-parsePlot s (x:xs) = parsePlot (findAndReplace "test" x s) xs
-
+parsePlot :: String -> [String] -> Int -> String
+parsePlot s [] _ = s
+parsePlot s (x:xs) r = parsePlot (findAndReplace new x s) xs r
+        where new = m !! (r `mod` length m)
+              m = (madLib Map.! x)
 
 findAndReplace ::  String -> String -> String -> String
 findAndReplace new old s = intercalate new . List.splitOn old $s
+
+--------------------------------------------------------------------------------
+passive_location  = ["inn", "village", "parish", "hamlet", "settlement", "pub", "tavern"]
+passive_character = ["barkeeper", "villager", "boy", "girl"]
+puzzle_locations = ["door", "gate", "gargoyle", "writings"]
+puzzle_descriptions = ["mysterious", "cryptic", "obscure", "puzzling"]
+
+madLib = Map.fromList [("passive_location", passive_location), ("passive_character", passive_character)]
