@@ -37,7 +37,6 @@ data Abilities = Abilities { strength :: Int,
                            level :: Int,
                            xp :: Int
                            } deriving (Show)
-
 data Item = Item { itemName :: String,
                    boost :: Int
                  } deriving (Show)
@@ -64,6 +63,9 @@ setDex (Abilities s d c i w ch l x) nd = Abilities s nd c i w ch l x
 
 setCost :: Abilities -> Int -> Abilities
 setCost (Abilities s d c i w ch l x) nc = Abilities s d nc i w ch l x
+
+setIntel :: Abilities -> Int -> Abilities
+setIntel (Abilities s d c i w ch l x) ni = Abilities s d c ni w ch l x
 
 setWis :: Abilities -> Int -> Abilities
 setWis (Abilities s d c i w ch l x) nw = Abilities s d c i nw ch l x

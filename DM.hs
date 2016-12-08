@@ -42,18 +42,23 @@ createPlayer = do
                ab <- getAbilities (Abilities 0 0 0 0 0 0 1 100) setAbs
                return (PC ab name race c [])
 
-getAbilities :: Abilities -> (Map.Map k a) -> IO Abilities
-getAbilities a [] = return a
+getAbilities :: Abilities -> (Map.Map String (Abilities -> Int -> Abilities)) -> IO Abilities
 getAbilities a m = do
-               putStr "Rolling 4d6... you're roll total is "
-               a <- rollDie
-               print a
-               putStr "Which ability do you want to set this value to?"
-               b <- getLine
-               c <- lookup b setAbs
-               when (ans == Nothing) putStrLn "Already set choose another ability"
-               return a
+                    if (Map.null m == False)
+                      then do
+                        putStr "Rolling 4d6... your roll is "
+                        b <- rollDie
+                        print b
+                        putStrLn "What attribute do you want to set this to?"
+                        d <- getLine
+                        case Map.lookup d m of
+                          Nothing -> putStrLn "You already set this ability, lets try this again!"
+                                      >> getAbilities a m
+                          Just e -> do
+                                    getAbilities ((m Map.! d) a b) (Map.delete d m)
 
+                    else
+                      return a
 
 getRand :: IO Int
 getRand = randomRIO (1, maxBound)
@@ -62,12 +67,12 @@ rollDie :: IO Int
 rollDie = randomRIO (3,18)
 
 getChoice :: PC -> String -> IO String
-getChoice c l = case runParser parseOptions () "" l of
+getChoice c l = case run parseOptions () "" l of
                      Right Quit -> quitGame
                      Right Help -> pure "Some helpful string here"
                      Right (Choose x) -> pure "make choice option"--some choice
-                     Right Stats -> pure (show $ getStats c)
-                     Left err -> pure "There was an error in the parse"
+                     Right Stats -> pure $ show $ getStats c
+                     Left err -> pure " There was an error in the parse"
 
 quitGame :: IO String
 quitGame = do
