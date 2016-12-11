@@ -68,5 +68,8 @@ passive_location  = ["inn", "village", "parish", "hamlet", "settlement", "pub", 
 passive_character = ["barkeeper", "villager", "boy", "girl"]
 puzzle_locations = ["door", "gate", "gargoyle", "writings"]
 puzzle_descriptions = ["mysterious", "cryptic", "obscure", "puzzling"]
+active_location = ["pasture", "cave", "dungeon", "plains", "wasteland", "mine"]
+active_location_description = ["misty", "cold", "dark", "dusty"]
+active_group_description = ["platoon", "group", "division", "unit", "gang", "pack", "mob", "band"]
 
 madLib = Map.fromList [("passive_location", passive_location), ("passive_character", passive_character)]
