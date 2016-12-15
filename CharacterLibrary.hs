@@ -1,14 +1,4 @@
 module CharacterLibrary where
--- a = Creature Name - i.e. Goblin
--- b = Creature Health - 5
--- c = Creature Damage - 2
-
--- Formula for Difficulty =
-
--- Goblins = [0.1 - 0.2] * eventLevel
--- Troll = [0.2 - 0.4] * eventLevel
--- Bandit = [0.3 - 0.5] * eventLevel
--- Dragon = [0.6 - 0.8] * evenLevel
 
 data Race = Halfling
           | Dwarf
@@ -43,11 +33,11 @@ data Item = Item { itemName :: String,
 
 
 data PC = PC { statsPC :: Abilities,
-                   name :: String,
-		               race :: String,
-                   classPC :: String,
-                   bag :: [Item]
-                 } deriving (Show)
+              name :: String,
+		          race :: String,
+              classPC :: String,
+              bag :: [Item]
+             } deriving (Show)
 
 data NPC = NPC { statsNPC :: Abilities,
                      typeNPC :: Typec,
@@ -72,6 +62,3 @@ setWis (Abilities s d c i w ch l x) nw = Abilities s d c i nw ch l x
 
 setCha :: Abilities -> Int -> Abilities
 setCha (Abilities s d c i w ch l x) nch = Abilities s d c i w nch l x
-
-getStats :: PC -> Abilities
-getStats (PC a _ _ _ _) = a
