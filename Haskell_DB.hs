@@ -1,3 +1,4 @@
+module Haskell_DB where
 {-# LANGUAGE OverloadedStrings #-}
 
 import           Control.Applicative

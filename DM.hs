@@ -9,7 +9,9 @@ import qualified Data.Map as Map
 import Text.PrettyPrint.Boxes
 
 import Parser
+import Haskell_DB
 import CharacterLibrary
+
 
 
 main :: IO ()
@@ -21,7 +23,7 @@ main = do
   putStrLn "Ready to start the game? (y/n)"
   ans <- getLine
   when (ans == "y")
-  startGame
+    startGame
   ----------------------------------------------
   -- start game
     -- Display commands
@@ -87,7 +89,10 @@ startGame = do
               putStr "\n"
               putStr "Welcome to the game! Its gonna be super lit. But first..."
               help
-              putStr "To get started lets choose a story"
+              putStr "Let's get started"
+              conn <- getConnection "test.db"
+              playGame conn 
+
 
 help :: IO ()
 help = do

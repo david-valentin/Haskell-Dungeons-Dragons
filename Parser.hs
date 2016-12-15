@@ -49,7 +49,6 @@ parseQuit = do {
             ; return Quit
             }
 
---For testing purposes
 run :: GenParser tok st a -> st -> SourceName -> [tok] -> Either ParseError a
 run = runParser
 
@@ -72,4 +71,6 @@ active_location = ["pasture", "cave", "dungeon", "plains", "wasteland", "mine"]
 active_location_description = ["misty", "cold", "dark", "dusty"]
 active_group_description = ["platoon", "group", "division", "unit", "gang", "pack", "mob", "band"]
 
-madLib = Map.fromList [("passive_location", passive_location), ("passive_character", passive_character)]
+madLib = Map.fromList [("passive_location", passive_location), ("passive_character", passive_character), ("puzzle_locations", puzzle_locations),
+                       ("puzzle_descriptions", puzzle_descriptions), ("active_location", active_location), ("active_location_description", active_location_description),
+                       ("active_group_description", active_group_description)]
