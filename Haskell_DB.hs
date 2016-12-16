@@ -6,7 +6,6 @@ import qualified Data.Text as T
 import           Database.SQLite.Simple
 import           Database.SQLite.Simple.FromRow
 
-<<<<<<< HEAD
 data DnD_Schema = DnD_Schema Int T.Text T.Text Int Int deriving (Show)
 
 instance FromRow DnD_Schema where
@@ -44,7 +43,6 @@ main = do
   execute conn "INSERT INTO mainstory (id, event, choice1, choice2, rootchoice) VALUES (?, ?, ?, ?, ?)" ((7 :: Int), ("It seems like you have stopped his research into the GHCI. The machine glows and continues to beckon you, but rather than going to the machine, you smash it with your sword. All the other machines stop humming in the lair as you trace your way out of the lair now blind. Your journey comes to an end, but the world seems slightly dimmer." :: String), ("[A] End" :: String), ("[B] End" :: String), ("" :: String))
   print "Created"
   close conn
-=======
 
 data Choices_Schema = Choices_Schema Int T.Text T.Text Int Int deriving (Show)
 data Outcome_Schema = Outcome_Schema Int T.Text T.Text Bool deriving (Show)
@@ -62,7 +60,6 @@ instance ToRow Choices_Schema where
   toRow (Choices_Schema id event eventType choice1 choice2) = toRow (id, event, eventType, choice1, choice2)
 -- instance ToRow Outcome_Schema where
 --   toRow (DnD_Schema id_ ty text ca cb) = toRow (id_, ty, text, ca, cb)
->>>>>>> bf8307c89b21df12d2c664a74f958c4b4d6a48fb
 
 
 getConnection :: String -> IO Connection
