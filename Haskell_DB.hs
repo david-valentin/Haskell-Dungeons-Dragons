@@ -6,7 +6,6 @@ import qualified Data.Text as T
 import           Database.SQLite.Simple
 import           Database.SQLite.Simple.FromRow
 
--- (Only ("Null" :: T.Text)) :: IO [Only (T.Text)]
 
 data Choices_Schema = Choices_Schema Int T.Text T.Text Int Int deriving (Show)
 data Outcome_Schema = Outcome_Schema Int T.Text T.Text Bool deriving (Show)
