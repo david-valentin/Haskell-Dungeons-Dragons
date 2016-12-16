@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
 import Control.Monad
@@ -7,9 +8,12 @@ import Data.List
 import System.Exit
 import qualified Data.Map as Map
 import Text.PrettyPrint.Boxes
+import  Database.SQLite.Simple
 
 import Parser
+import Haskell_DB
 import CharacterLibrary
+
 
 
 main :: IO ()
@@ -21,11 +25,11 @@ main = do
   putStrLn "Ready to start the game? (y/n)"
   ans <- getLine
   when (ans == "y")
-  startGame
+    startGame
   ----------------------------------------------
   -- start game
-    -- Display commands
-    -- Start Game/Pick Story Line
+    -- Display commands (check)
+    -- Start Game/Pick Story Line (eh)
     -- Get intro for story line
     -- Pick Plot Line/Wait for response/go to next/repeat
 
@@ -87,7 +91,15 @@ startGame = do
               putStr "\n"
               putStr "Welcome to the game! Its gonna be super lit. But first..."
               help
-              putStr "To get started lets choose a story"
+              putStr "Let's get started"
+              conn <- getConnection "Dnd.db"
+              playGame
+
+playGame ::  IO ()
+playGame  = do
+                conn <- getConnection "Dnd.db"
+                getChoices conn $ "select * from choices"
+
 
 help :: IO ()
 help = do
