@@ -26,8 +26,8 @@ main = do
     startGame
   ----------------------------------------------
   -- start game
-    -- Display commands
-    -- Start Game/Pick Story Line
+    -- Display commands (check)
+    -- Start Game/Pick Story Line (eh)
     -- Get intro for story line
     -- Pick Plot Line/Wait for response/go to next/repeat
 
@@ -90,9 +90,13 @@ startGame = do
               putStr "Welcome to the game! Its gonna be super lit. But first..."
               help
               putStr "Let's get started"
-              conn <- getConnection "test.db"
-              playGame conn 
+              conn <- getConnection "Dnd.db"
+              playGame conn
 
+playGame :: Connection -> IO ()
+playGame conn = do {
+                
+                }
 
 help :: IO ()
 help = do

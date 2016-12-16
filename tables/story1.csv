@@ -1,5 +1,0 @@
-id,textEvent,choiceA,choiceB
-1,You come across a [adj] [location] and see a [group_description] of [creature]s. The [creature]s have not yet noticed you and so you have some time to decide. ,2,3
-2,"With swift foot and heavy sword in hand, you both rush into the battle and catch them off guard. It is a complete victory as you vanquish your foes. Some of the [active_characters] run off in the distance – clearly afraid of your combined might. You swiftly defeat them and continue on your journey.",1,4
-3,"You now come across a [risk_description] [risk_location]. There is a path that seems to lead you to the right direction, but it does seem slightly dangerous. Do you risk crossing the [risk_location]?",4,2
-4,"As you cross through [RISK LOCATION], you notice an unstable structure up ahead from some ancient civilization years ago. Being a perceptive hero, you decide to rush through quickly and making sure that you make it out quickly. By the time you make it out of the [RISK LOCATION], the structure collapses onto itself. It seems like you are still able to continue your journey. ",1,3

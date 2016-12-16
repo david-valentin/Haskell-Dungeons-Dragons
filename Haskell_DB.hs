@@ -15,7 +15,6 @@ instance FromRow DnD_Schema where
 instance ToRow DnD_Schema where
   toRow (DnD_Schema id_ ty text ca cb) = toRow (id_, ty, text, ca, cb)
 
-<<<<<<< HEAD
 main :: IO ()
 main = do
   conn <- open "Dnd.db"
@@ -29,11 +28,11 @@ main = do
   execute conn "INSERT INTO outcomes (EventType, Event, outcome) VALUES (?, ?, ?)" (("risk_event" :: String), ("As you cross through [risk_location], the ground begins to shake. You quickly notice a rockslide up ahead and begins crashing down. You rush quickly through the [RISK LOCATION] to avoid certain death; however, in the process you both become injured. You lose [num_gen] in your [stat]." :: String), (False :: Bool))
   print "Created"
   close conn
-=======
 
 getConnection :: String -> IO Connection
 getConnection db = open db
 
 closeConnection :: Connection -> IO ()
 closeConnection conn = close conn
->>>>>>> a81a89a3a424c1704bd8dfa07c1446564a2aa962
+
+queryDB :: Connection -> String -> IO
