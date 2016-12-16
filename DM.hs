@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
 import Control.Monad
@@ -7,6 +8,7 @@ import Data.List
 import System.Exit
 import qualified Data.Map as Map
 import Text.PrettyPrint.Boxes
+import  Database.SQLite.Simple
 
 import Parser
 import Haskell_DB
@@ -91,12 +93,13 @@ startGame = do
               help
               putStr "Let's get started"
               conn <- getConnection "Dnd.db"
-              playGame conn
+              playGame
 
-playGame :: Connection -> IO ()
-playGame conn = do {
-                
-                }
+playGame ::  IO ()
+playGame  = do
+                conn <- getConnection "Dnd.db"
+                getChoices conn $ "select * from choices"
+
 
 help :: IO ()
 help = do
