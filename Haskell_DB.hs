@@ -41,6 +41,13 @@ main = do
   execute conn "INSERT INTO mainstory (id, event, choice1, choice2, rootchoice) VALUES (?, ?, ?, ?, ?)" ((5 :: Int), ("As you strike down Retep with your sword, the man transforms into a dragon and shields himself from your attack, which knocks you against the glowing, humming machines. It seems like Retep will soon die and begins to  as shift back to his human form. He looks kinda like I guy who teaches or something. You focus on the GHCi. The machine glows and beckons you to it. A problem appears on the screen: Build a function that finds the kth element of a list called elementat. Separate lines of code with ; character. Cases: 1. elementAt [] 0 = [] 2. elementAt [] 1 = [] 3. elementAt [1,2,3] 1 = 1" :: String), ("Type your answer separated by ;" :: String), ("NULL" :: String), ("[B]" :: String))
   execute conn "INSERT INTO mainstory (id, event, choice1, choice2, rootchoice) VALUES (?, ?, ?, ?, ?)" ((6 :: Int), ("Retep thanks you for your effort and continues with his research into the GHCi. You question whether he should continue to research into such a powerful weapon, but understanding the GHCi may prove helpful in the future. You leave the lair, and it seems like your journey has come to an end." :: String), ("[A] End" :: String), ("[A] End" :: String), ("" :: String))
   execute conn "INSERT INTO mainstory (id, event, choice1, choice2, rootchoice) VALUES (?, ?, ?, ?, ?)" ((7 :: Int), ("It seems like you have stopped his research into the GHCI. The machine glows and continues to beckon you, but rather than going to the machine, you smash it with your sword. All the other machines stop humming in the lair as you trace your way out of the lair now blind. Your journey comes to an end, but the world seems slightly dimmer." :: String), ("[A] End" :: String), ("[B] End" :: String), ("" :: String))
+
+  -- Main Storyline Query`
+  -- (id INTEGER PRIMARY KEY ASC, event Text, choice1 Text, choice2 Text, rootchoice Text)
+  mainstoryline_query <- query_ conn "SELECT event from mainstory where id = 1" :: IO [DnD_Schema]
+
+
+  random_event_query <- query_ conn ""
   print "Created"
   close conn
 
