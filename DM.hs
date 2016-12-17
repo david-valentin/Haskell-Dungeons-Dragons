@@ -5,6 +5,7 @@ import Control.Monad
 import System.Random
 import Data.Int
 import Data.List
+import qualified Data.Text as T
 import System.Exit
 import qualified Data.Map as Map
 import Text.PrettyPrint.Boxes
@@ -15,16 +16,8 @@ import Haskell_DB
 import CharacterLibrary
 
 
-
 main :: IO ()
 main = do
-  --Set up Game/Create Character
-  pc <- createPlayer
-  putStr "Your Character is "
-  print pc
-  putStrLn "Ready to start the game? (y/n)"
-  ans <- getLine
-  when (ans == "y")
     startGame
   ----------------------------------------------
   -- start game
@@ -38,7 +31,7 @@ main = do
 ---------------------------------helpers---------------------------------------
 createPlayer :: IO PC
 createPlayer = do
-               putStrLn "Name?"
+               putStrLn "Character Name?"
                name <- getLine
                putStrLn "Race?"
                race <- getLine
@@ -54,13 +47,19 @@ getAbilities a m = do
                         putStr "Rolling dice... your roll is "
                         b <- rollDie
                         print b
+                        putStrLn ""
+                        putStrLn "Remaining abilities to set"
+                        putStrLn "---------------------------"
+                        mapM_ putStrLn (Map.keys m)
+                        putStrLn "---------------------------"
+                        putStrLn ""
                         putStrLn "What ability do you want to set this to?"
                         d <- getLine
-                        case Map.lookup d m of
+                        case Map.lookup (T.unpack . T.toLower $ (T.pack d)) m of
                           Nothing -> putStrLn "You already set this ability or it doesn't exist, lets try that again!"
                                       >> getAbilities a m
                           Just e -> do
-                                    getAbilities ((m Map.! d) a b) (Map.delete d m)
+                                    getAbilities ((m Map.! (T.unpack . T.toLower $ (T.pack d)) ) a b) (Map.delete (T.unpack . T.toLower $ (T.pack d)) m)
 
                     else
                       return a
@@ -91,15 +90,33 @@ startGame = do
               putStr "\n"
               putStr "Welcome to the game! Its gonna be super lit. But first..."
               help
-              putStr "Let's get started"
+              putStrLn "Ok, Let's get started"
+              --ask ready take y/n do rest on y wait on n
+              putStrLn "-------------------------------------------------------"
+              pc <- createPlayer
+              putStr "Your Character is "
+              print pc
+              putStrLn "Ready to start the game? (y/n)"
+              ans <- getLine
+              --   when (ans == "y") do
               conn <- getConnection "Dnd.db"
-              playGame
+              playGame pc conn "Null"
 
-playGame ::  IO ()
-playGame  = do
-                conn <- getConnection "Dnd.db"
-                getChoices conn $ "select * from choices"
+playGame :: PC -> Connection -> String -> IO ()
+playGame pc conn s = do
+                r <- query conn "select * from mainstory where rootchoice = ?" (Only(T.pack s :: T.Text)) :: IO [MainStory_Schema]
+                forM_ r $ \l -> do
+                            print . T.unpack $ event l --change to putstrln once db is fixed
+                            putStrLn "You have 2 choices"
+                            putStrLn . T.unpack $ choice1 l
+                            putStrLn . T.unpack $ choice2 l
+                putStr "What will it be? "
+                ans <- getLine
+                getChoice pc ans --getChoice isnt working as expected!!
+                playChoice conn 3
 
+playChoice :: Connection -> Int -> IO ()
+playChoice conn i = putStrLn "Something"
 
 help :: IO ()
 help = do
