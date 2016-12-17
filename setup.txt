@@ -1,0 +1,21 @@
+--
+
+List of Dependencies:
+
+1. Database.SQLite.Simple
+* https://hackage.haskell.org/package/sqlite-simple-0.4.12.0/docs/Database-SQLite-Simple.html
+
+2.
+
+
+
+
+
+
+
+
+
+
+
+
+--
