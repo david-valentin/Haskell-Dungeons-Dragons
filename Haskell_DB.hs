@@ -43,8 +43,8 @@ main = do
   execute conn "INSERT INTO mainstory (id, event, choice1, choice2, rootchoice) VALUES (?, ?, ?, ?, ?)" ((7 :: Int), ("It seems like you have stopped his research into the GHCI. The machine glows and continues to beckon you, but rather than going to the machine, you smash it with your sword. All the other machines stop humming in the lair as you trace your way out of the lair now blind. Your journey comes to an end, but the world seems slightly dimmer." :: String), ("[A] End" :: String), ("[B] End" :: String), ("" :: String))
   -- Main Storyline Query
   -- (id INTEGER PRIMARY KEY ASC, event Text, choice1 Text, choice2 Text, rootchoice Text)
-  mainstoryline_query <- query_ conn "SELECT event from mainstory where id = 1" :: IO [DnD_Schema]
-  random_event_query <- query_ conn ""
+  -- mainstoryline_query <- query_ conn "SELECT event from mainstory where id = 1" :: IO [DnD_Schema]
+  -- random_event_query <- query_ conn ""
   print "Created"
   close conn
 
